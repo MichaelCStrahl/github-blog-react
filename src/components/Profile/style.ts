@@ -31,6 +31,7 @@ export const ProfileImageContent = styled.div`
 export const ProfileBodyContent = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
 `;
 
 export const ProfileHeaderContent = styled.div`
@@ -98,4 +99,13 @@ export const ProfileInfoItem = styled.div`
     color: ${(props) => props.theme["base-label"]};
     font-size: 1rem;
   }
+`;
+
+export const TitleArticle = styled.h1`
+  font-size: 1.5rem;
+  line-height: 1.3;
+  font-weight: 700;
+  color: ${(props) => props.theme["base-title"]};
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
 `;

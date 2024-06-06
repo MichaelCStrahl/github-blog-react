@@ -11,7 +11,7 @@ export const PostCardGridContainer = styled.div`
   padding-bottom: 10rem;
 `;
 
-export const PostCardContent = styled.div`
+export const PostCardContent = styled.a`
   display: flex;
   flex-direction: column;
   height: 16.25rem;
@@ -19,12 +19,21 @@ export const PostCardContent = styled.div`
   padding: 2rem;
   background-color: ${(props) => props.theme["base-post"]};
   border-radius: 10px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
 
   p {
     font-size: 1rem;
     line-height: 1.6;
     font-weight: 400;
     margin-top: 1.25rem;
+    color: ${(props) => props.theme["base-text"]};
+  }
+
+  &:hover {
+    border: 2px solid ${(props) => props.theme["base-label"]};
+    transition: border 0.5s;
   }
 `;
 

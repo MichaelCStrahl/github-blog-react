@@ -2,9 +2,13 @@ import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import {
 	faArrowUpRightFromSquare,
 	faBuilding,
+	faCalendarDay,
+	faChevronLeft,
+	faComment,
 	faUserGroup,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useLocation } from "react-router-dom";
 import {
 	ProfileBodyContent,
 	ProfileContainer,
@@ -15,9 +19,54 @@ import {
 	ProfileInfoContent,
 	ProfileInfoItem,
 	ProfileText,
+	TitleArticle,
 } from "./style";
 
 export function Profile() {
+	const { pathname } = useLocation();
+
+	const isArticlePage = pathname.split("/").find((item) => item === "post");
+
+	if (isArticlePage) {
+		return (
+			<ProfileContainer>
+				<ProfileContent>
+					<ProfileBodyContent>
+						<ProfileHeaderContent>
+							<ProfileHeaderLink href="/">
+								<FontAwesomeIcon icon={faChevronLeft} size="sm" />
+								<span>Voltar</span>
+							</ProfileHeaderLink>
+							<ProfileHeaderLink href="/">
+								<span>Ver no Github</span>
+								<FontAwesomeIcon icon={faArrowUpRightFromSquare} size="sm" />
+							</ProfileHeaderLink>
+						</ProfileHeaderContent>
+
+						<TitleArticle>
+							Lorem ipsum dolor sit amet consectetur adipisicing elit
+						</TitleArticle>
+
+						<ProfileInfoContent>
+							<ProfileInfoItem>
+								<FontAwesomeIcon icon={faGithub} size="sm" />
+								<span>teste</span>
+							</ProfileInfoItem>
+							<ProfileInfoItem>
+								<FontAwesomeIcon icon={faCalendarDay} size="sm" />
+								<span>teste</span>
+							</ProfileInfoItem>
+							<ProfileInfoItem>
+								<FontAwesomeIcon icon={faComment} size="sm" />
+								<span>teste</span>
+							</ProfileInfoItem>
+						</ProfileInfoContent>
+					</ProfileBodyContent>
+				</ProfileContent>
+			</ProfileContainer>
+		);
+	}
+
 	return (
 		<ProfileContainer>
 			<ProfileContent>

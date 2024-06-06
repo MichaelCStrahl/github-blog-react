@@ -1,3 +1,11 @@
+import { Article } from "../components/Article";
+import { Profile } from "../components/Profile";
+
 export function Post() {
-	return <h1>Post</h1>;
+	return (
+		<>
+			<Profile />
+			<Article />
+		</>
+	);
 }
