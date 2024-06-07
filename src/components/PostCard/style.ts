@@ -41,6 +41,7 @@ export const PostCardHeader = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+  gap: 1rem;
 
   h1 {
     flex: 1;
@@ -50,11 +51,12 @@ export const PostCardHeader = styled.div`
     font-weight: 700;
   }
 
-  span {
+  time {
     width: max-content;
     font-size: 0.875rem;
     line-height: 1.6;
     color: ${(props) => props.theme["base-span"]};
     margin-top: 0.3rem;
+    text-transform: capitalize;
   }
 `;

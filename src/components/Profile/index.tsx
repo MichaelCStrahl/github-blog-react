@@ -8,7 +8,10 @@ import {
 	faUserGroup,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useLocation } from "react-router-dom";
+import { formatDistanceToNow } from "date-fns";
+import { ptBR } from "date-fns/locale";
+import { useEffect, useState } from "react";
+import { api } from "../../lib/axios";
 import {
 	ProfileBodyContent,
 	ProfileContainer,
@@ -22,12 +25,32 @@ import {
 	TitleArticle,
 } from "./style";
 
-export function Profile() {
-	const { pathname } = useLocation();
+interface ProfileProps {
+	issue?: Issue;
+}
 
-	const isArticlePage = pathname.split("/").find((item) => item === "post");
+export function Profile({ issue }: ProfileProps) {
+	const [user, setUser] = useState<User | undefined>(undefined);
+	const hasIssue = !!issue;
 
-	if (isArticlePage) {
+	async function fetchGithubUser() {
+		const response = await api.get("/users/MichaelCStrahl");
+
+		setUser(response.data);
+	}
+
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+	useEffect(() => {
+		fetchGithubUser();
+	}, []);
+
+	const hasUser = !!user;
+
+	if (!hasUser) {
+		return null;
+	}
+
+	if (hasIssue) {
 		return (
 			<ProfileContainer>
 				<ProfileContent>
@@ -37,28 +60,31 @@ export function Profile() {
 								<FontAwesomeIcon icon={faChevronLeft} size="sm" />
 								<span>Voltar</span>
 							</ProfileHeaderLink>
-							<ProfileHeaderLink href="/">
+							<ProfileHeaderLink href={issue.html_url} target="_blank">
 								<span>Ver no Github</span>
 								<FontAwesomeIcon icon={faArrowUpRightFromSquare} size="sm" />
 							</ProfileHeaderLink>
 						</ProfileHeaderContent>
 
-						<TitleArticle>
-							Lorem ipsum dolor sit amet consectetur adipisicing elit
-						</TitleArticle>
+						<TitleArticle>{issue.title}</TitleArticle>
 
 						<ProfileInfoContent>
 							<ProfileInfoItem>
 								<FontAwesomeIcon icon={faGithub} size="sm" />
-								<span>teste</span>
+								<span>{user.login}</span>
 							</ProfileInfoItem>
 							<ProfileInfoItem>
 								<FontAwesomeIcon icon={faCalendarDay} size="sm" />
-								<span>teste</span>
+								<time>
+									{formatDistanceToNow(issue.created_at, {
+										addSuffix: true,
+										locale: ptBR,
+									})}
+								</time>
 							</ProfileInfoItem>
 							<ProfileInfoItem>
 								<FontAwesomeIcon icon={faComment} size="sm" />
-								<span>teste</span>
+								<span>{`${issue.comments} comentários`}</span>
 							</ProfileInfoItem>
 						</ProfileInfoContent>
 					</ProfileBodyContent>
@@ -71,35 +97,32 @@ export function Profile() {
 		<ProfileContainer>
 			<ProfileContent>
 				<ProfileImageContent>
-					<img src="https://picsum.photos/148" alt="" />
+					<img src={user.avatar_url} alt="" />
 				</ProfileImageContent>
 				<ProfileBodyContent>
 					<ProfileHeaderContent>
-						<h1>Camera Willison</h1>
-						<ProfileHeaderLink href="/">
+						<h1>{user.name}</h1>
+						<ProfileHeaderLink href={user.html_url} target="_blank">
 							<span>Github</span>
 							<FontAwesomeIcon icon={faArrowUpRightFromSquare} size="sm" />
 						</ProfileHeaderLink>
 					</ProfileHeaderContent>
-					<ProfileText>
-						Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ullam
-						excepturi quisquam fugiat qui alias nam, illo blanditiis. Debitis
-						dolores incidunt corporis blanditiis molestiae adipisci et itaque,
-						ea nam dolorem. Eum.
-					</ProfileText>
+					<ProfileText>{user.bio}</ProfileText>
 
 					<ProfileInfoContent>
 						<ProfileInfoItem>
 							<FontAwesomeIcon icon={faGithub} size="sm" />
-							<span>teste</span>
+							<span>{user.login}</span>
 						</ProfileInfoItem>
-						<ProfileInfoItem>
-							<FontAwesomeIcon icon={faBuilding} size="sm" />
-							<span>teste</span>
-						</ProfileInfoItem>
+						{user.company && (
+							<ProfileInfoItem>
+								<FontAwesomeIcon icon={faBuilding} size="sm" />
+								<span>{user.company}</span>
+							</ProfileInfoItem>
+						)}
 						<ProfileInfoItem>
 							<FontAwesomeIcon icon={faUserGroup} size="sm" />
-							<span>teste</span>
+							<span>{user.followers} seguidores</span>
 						</ProfileInfoItem>
 					</ProfileInfoContent>
 				</ProfileBodyContent>

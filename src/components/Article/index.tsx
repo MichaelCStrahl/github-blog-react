@@ -2,35 +2,21 @@ import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { ArticleContainer } from "./style";
 
-export function Article() {
+interface ArticleProps {
+	issue: Issue | undefined;
+}
+
+export function Article({ issue }: ArticleProps) {
+	const hasIssue = !!issue;
+
+	if (!hasIssue) {
+		return <p>Ops! Esse artigo não possui conteúdo ainda</p>;
+	}
+
 	return (
 		<ArticleContainer>
 			<p>
-				<Markdown remarkPlugins={[remarkGfm]}>{`# GFM
-
-## Autolink literals
-
-www.example.com, https://example.com, and contact@example.com.
-
-## Footnote
-
-A note[^1]
-
-[^1]: Big note.
-
-## Strikethrough
-
-~one~ or ~~two~~ tildes.
-
-## Table
-
-| a | b  |  c |  d  |
-| - | :- | -: | :-: |
-
-## Tasklist
-
-* [ ] to do
-* [x] done`}</Markdown>
+				<Markdown remarkPlugins={[remarkGfm]}>{issue.body}</Markdown>
 			</p>
 		</ArticleContainer>
 	);

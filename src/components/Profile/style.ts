@@ -26,6 +26,10 @@ export const ProfileImageContent = styled.div`
   min-width: fit-content;
   border-radius: 8px;
   overflow: hidden;
+
+  img {
+    max-width: 148px;
+  }
 `;
 
 export const ProfileBodyContent = styled.div`
@@ -90,7 +94,7 @@ export const ProfileInfoItem = styled.div`
   align-items: center;
   gap: 0.5rem;
 
-  span {
+  span, time {
     font-size: 1rem;
     line-height: 1.6;
   }

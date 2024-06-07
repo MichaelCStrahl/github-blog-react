@@ -1,22 +1,26 @@
+import { formatDistanceToNow } from "date-fns";
+import { ptBR } from "date-fns/locale";
 import { PostCardContent, PostCardHeader } from "./style";
 
-export function PostCard() {
+interface PostCardProps {
+	item: Issue;
+}
+
+export function PostCard({ item }: PostCardProps) {
 	return (
 		<>
-			<PostCardContent href="/post/asdadas">
+			<PostCardContent href={`/post/${item.id}`}>
 				<PostCardHeader>
-					<h1>
-						JavaScript data types and data structures asdasdasd a das das d
-					</h1>
-					<span>Há 1 dia</span>
+					<h1>{item.title}</h1>
+					<time>
+						{formatDistanceToNow(item.created_at, {
+							addSuffix: true,
+							locale: ptBR,
+						})}
+					</time>
 				</PostCardHeader>
 
-				<p>
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam
-					aliquam officiis est. Sequi atque deleniti ex magni? Nulla quaerat
-					assumenda exercitationem pariatur error eos omnis sint reiciendis
-					quas, ut maxime.
-				</p>
+				<p>{`${item.body.slice(0, 181)}...`}</p>
 			</PostCardContent>
 		</>
 	);
