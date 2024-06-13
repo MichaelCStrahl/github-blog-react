@@ -3,6 +3,7 @@ import { api } from "../lib/axios";
 
 interface GithubIssuesContextType {
 	githubIssues: GithubIssues | undefined;
+	fetchGithubIssues: (query?: string) => Promise<void>;
 }
 
 interface GithubIssuesProviderProps {
@@ -16,10 +17,13 @@ export function GithubIssuesProvider({ children }: GithubIssuesProviderProps) {
 		undefined,
 	);
 
-	async function loadGithubIssues() {
+	async function fetchGithubIssues(query?: string) {
+		const defaultParam = "repo:MichaelCStrahl/github-blog-react";
+		const queryParam = query ? `${query} ${defaultParam}` : defaultParam;
+
 		const response = await api.get("/search/issues", {
 			params: {
-				q: "repo:MichaelCStrahl/github-blog-react",
+				q: queryParam,
 			},
 		});
 
@@ -28,11 +32,11 @@ export function GithubIssuesProvider({ children }: GithubIssuesProviderProps) {
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
-		loadGithubIssues();
+		fetchGithubIssues();
 	}, []);
 
 	return (
-		<GithubIssuesContext.Provider value={{ githubIssues }}>
+		<GithubIssuesContext.Provider value={{ githubIssues, fetchGithubIssues }}>
 			{children}
 		</GithubIssuesContext.Provider>
 	);
