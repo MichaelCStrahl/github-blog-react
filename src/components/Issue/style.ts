@@ -33,3 +33,15 @@ export const IssueContainer = styled.section`
     }
   }
 `;
+
+export const IssueHeader = styled.div`
+  margin-top: 2rem;
+
+  p {
+    margin-top: 0.5rem;
+  }
+`;
+
+export const IssueLinkContent = styled.div`
+  width: fit-content;
+`;

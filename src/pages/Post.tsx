@@ -1,27 +1,28 @@
-import { useContext } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useContextSelector } from "use-context-selector";
 import { Issue } from "../components/Issue";
-import { Profile } from "../components/Profile";
-import { GithubIssuesContext } from "../contexts/GithubIssuesContext";
+import { PostInfoHeader } from "../components/PostInfoHeader";
+import { GithubContext } from "../contexts/GithubContext";
 
 export function Post() {
-	const { githubIssues } = useContext(GithubIssuesContext);
+	const { user, githubIssues } = useContextSelector(
+		GithubContext,
+		(context) => {
+			return {
+				user: context.user,
+				githubIssues: context.githubIssues,
+			};
+		},
+	);
 	const { issueId } = useParams();
-	const navigate = useNavigate();
 
 	const issue = githubIssues?.items.find(
 		(issue) => issue.id.toString() === issueId,
 	);
 
-	const hasIssue = !!issue;
-
-	if (!hasIssue) {
-		navigate("/");
-	}
-
 	return (
 		<>
-			<Profile issue={issue} />
+			<PostInfoHeader issue={issue} userLogin={user?.login} />
 			<Issue issue={issue} />
 		</>
 	);

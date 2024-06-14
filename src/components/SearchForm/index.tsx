@@ -6,9 +6,9 @@ import {
 } from "./style";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useContext } from "react";
+import { useContextSelector } from "use-context-selector";
 import { z } from "zod";
-import { GithubIssuesContext } from "../../contexts/GithubIssuesContext";
+import { GithubContext } from "../../contexts/GithubContext";
 
 interface SearchFormProps {
 	countIssues: number | boolean;
@@ -24,7 +24,10 @@ export function SearchForm({ countIssues }: SearchFormProps) {
 	const { register, handleSubmit } = useForm<SearchFormInputs>({
 		resolver: zodResolver(searchFormSchema),
 	});
-	const { fetchGithubIssues } = useContext(GithubIssuesContext);
+
+	const fetchGithubIssues = useContextSelector(GithubContext, (context) => {
+		return context.fetchGithubIssues;
+	});
 
 	const hasCountIssues = !!countIssues;
 	const lengthIssues = hasCountIssues ? countIssues : "0";

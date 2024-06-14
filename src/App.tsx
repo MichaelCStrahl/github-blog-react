@@ -1,19 +1,19 @@
 import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import { Router } from "./Router";
-import { GithubIssuesProvider } from "./contexts/GithubIssuesContext";
+import { GithubProvider } from "./contexts/GithubContext";
 import { GlobalStyle } from "./styles/global";
 import { defaultTheme } from "./styles/themes/default";
 
 export function App() {
 	return (
 		<ThemeProvider theme={defaultTheme}>
-			<GithubIssuesProvider>
+			<GithubProvider>
 				<BrowserRouter>
 					<Router />
 					<GlobalStyle />
 				</BrowserRouter>
-			</GithubIssuesProvider>
+			</GithubProvider>
 		</ThemeProvider>
 	);
 }

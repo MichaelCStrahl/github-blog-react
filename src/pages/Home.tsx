@@ -1,18 +1,20 @@
-import { useContext } from "react";
+import { useContextSelector } from "use-context-selector";
 import { IssueCard } from "../components/IssueCard";
 import { IssueCardGridContainer } from "../components/IssueCard/style";
-import { Profile } from "../components/Profile";
+import { ProfileHeader } from "../components/ProfileHeader";
 import { SearchForm } from "../components/SearchForm";
-import { GithubIssuesContext } from "../contexts/GithubIssuesContext";
+import { GithubContext } from "../contexts/GithubContext";
 
 export function Home() {
-	const { githubIssues } = useContext(GithubIssuesContext);
+	const githubIssues = useContextSelector(GithubContext, (context) => {
+		return context.githubIssues;
+	});
 	const hasGithubIssues = !!githubIssues;
 	const githubIssuesLength = hasGithubIssues && githubIssues.items.length;
 
 	return (
 		<>
-			<Profile /> <SearchForm countIssues={githubIssuesLength} />
+			<ProfileHeader /> <SearchForm countIssues={githubIssuesLength} />
 			<IssueCardGridContainer>
 				{hasGithubIssues &&
 					githubIssues.items.map((item) => (

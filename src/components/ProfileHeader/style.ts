@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ProfileContainer = styled.section`
+export const ProfileHeaderContainer = styled.section`
   width: 100%;
   position: relative;
   z-index: 999;
@@ -11,7 +11,7 @@ export const ProfileContainer = styled.section`
   margin-top: -5rem;
 `;
 
-export const ProfileContent = styled.div`
+export const ProfileHeaderContent = styled.div`
   display: flex;
   background: ${(props) => props.theme["base-background"]};
   padding: 2rem 2rem 2rem 2.5rem;
@@ -21,7 +21,7 @@ export const ProfileContent = styled.div`
   gap: 2rem;
 `;
 
-export const ProfileImageContent = styled.div`
+export const ProfileHeaderImageContent = styled.div`
   display: flex;
   min-width: fit-content;
   border-radius: 8px;
@@ -32,13 +32,13 @@ export const ProfileImageContent = styled.div`
   }
 `;
 
-export const ProfileBodyContent = styled.div`
+export const ProfileHeaderBodyContent = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
 `;
 
-export const ProfileHeaderContent = styled.div`
+export const ProfileHeaderHeaderContent = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -50,7 +50,7 @@ export const ProfileHeaderContent = styled.div`
   }
 `;
 
-export const ProfileHeaderLink = styled.a`
+export const ProfileHeaderHeaderLink = styled.a`
   display: flex;
   position: relative;
   align-items: center;
@@ -75,21 +75,21 @@ export const ProfileHeaderLink = styled.a`
   }
 `;
 
-export const ProfileText = styled.p`
+export const ProfileHeaderText = styled.p`
   font-size: 1rem;
   line-height: 1.6;
   font-weight: 400;
   margin-top: 0.5rem;
 `;
 
-export const ProfileInfoContent = styled.div`
+export const ProfileHeaderInfoContent = styled.div`
   display: flex;
   align-items: center;
   gap: 1.5rem;
   margin-top: auto;
 `;
 
-export const ProfileInfoItem = styled.div`
+export const ProfileHeaderInfoItem = styled.div`
   display: flex;
   align-items: center;
   gap: 0.5rem;
