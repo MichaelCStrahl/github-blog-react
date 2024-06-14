@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Article } from "../components/Article";
+import { Issue } from "../components/Issue";
 import { Profile } from "../components/Profile";
 import { GithubIssuesContext } from "../contexts/GithubIssuesContext";
 
@@ -22,7 +22,7 @@ export function Post() {
 	return (
 		<>
 			<Profile issue={issue} />
-			<Article issue={issue} />
+			<Issue issue={issue} />
 		</>
 	);
 }

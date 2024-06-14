@@ -1,12 +1,12 @@
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { ArticleContainer } from "./style";
+import { IssueContainer } from "./style";
 
-interface ArticleProps {
+interface IssueProps {
 	issue: Issue | undefined;
 }
 
-export function Article({ issue }: ArticleProps) {
+export function Issue({ issue }: IssueProps) {
 	const hasIssue = !!issue;
 
 	if (!hasIssue) {
@@ -14,10 +14,10 @@ export function Article({ issue }: ArticleProps) {
 	}
 
 	return (
-		<ArticleContainer>
+		<IssueContainer>
 			<p>
 				<Markdown remarkPlugins={[remarkGfm]}>{issue.body}</Markdown>
 			</p>
-		</ArticleContainer>
+		</IssueContainer>
 	);
 }

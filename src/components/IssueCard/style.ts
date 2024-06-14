@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const PostCardGridContainer = styled.div`
+export const IssueCardGridContainer = styled.div`
   width: 100%;
   max-width: 1120px;
   margin: 0 auto;
@@ -11,7 +11,7 @@ export const PostCardGridContainer = styled.div`
   padding-bottom: 10rem;
 `;
 
-export const PostCardContent = styled.a`
+export const IssueCardContent = styled.a`
   display: flex;
   flex-direction: column;
   height: 16.25rem;
@@ -37,7 +37,7 @@ export const PostCardContent = styled.a`
   }
 `;
 
-export const PostCardHeader = styled.div`
+export const IssueCardHeader = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: space-between;

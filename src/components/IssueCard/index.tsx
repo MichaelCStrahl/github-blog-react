@@ -1,16 +1,16 @@
 import { formatDistanceToNow } from "date-fns";
 import { ptBR } from "date-fns/locale";
-import { PostCardContent, PostCardHeader } from "./style";
+import { IssueCardContent, IssueCardHeader } from "./style";
 
-interface PostCardProps {
+interface IssueCardProps {
 	item: Issue;
 }
 
-export function PostCard({ item }: PostCardProps) {
+export function IssueCard({ item }: IssueCardProps) {
 	return (
 		<>
-			<PostCardContent href={`/post/${item.id}`}>
-				<PostCardHeader>
+			<IssueCardContent href={`/post/${item.id}`}>
+				<IssueCardHeader>
 					<h1>{item.title}</h1>
 					<time>
 						{formatDistanceToNow(item.created_at, {
@@ -18,10 +18,10 @@ export function PostCard({ item }: PostCardProps) {
 							locale: ptBR,
 						})}
 					</time>
-				</PostCardHeader>
+				</IssueCardHeader>
 
 				<p>{`${item.body.slice(0, 181)}...`}</p>
-			</PostCardContent>
+			</IssueCardContent>
 		</>
 	);
 }

@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { PostCard } from "../components/PostCard";
-import { PostCardGridContainer } from "../components/PostCard/style";
+import { IssueCard } from "../components/IssueCard";
+import { IssueCardGridContainer } from "../components/IssueCard/style";
 import { Profile } from "../components/Profile";
 import { SearchForm } from "../components/SearchForm";
 import { GithubIssuesContext } from "../contexts/GithubIssuesContext";
@@ -13,12 +13,12 @@ export function Home() {
 	return (
 		<>
 			<Profile /> <SearchForm countIssues={githubIssuesLength} />
-			<PostCardGridContainer>
+			<IssueCardGridContainer>
 				{hasGithubIssues &&
 					githubIssues.items.map((item) => (
-						<PostCard key={item.id} item={item} />
+						<IssueCard key={item.id} item={item} />
 					))}
-			</PostCardGridContainer>
+			</IssueCardGridContainer>
 		</>
 	);
 }
